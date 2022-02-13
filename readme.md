@@ -39,6 +39,11 @@ keystone-compatible face plate with some keystone Cat6 female-to-female coupler
 jacks to pass ethernet through my wall from my network closet into my crawl
 space.
 
+Installed, it looks like this:
+
+![img](./Case/installed_bottom.jpg "Photo of Raspberry Pi installed in crawl space, from the bottom")
+![img](./Case/installed_side.jpg "Photo of Raspberry Pi installed in crawl space, from the side")
+
 ## Database Setup
 
 1. Make sure an instance of postgres running somewhere
@@ -95,7 +100,7 @@ image
 
 Outputs should look something like
 
-![Sample output figure](./Reporting/env_log_plot.png)
+![img](./Reporting/env_log_plot.png "Demo output figure from reporting notebook")
 
 
 [req_rept]: ./Reporting/requirements-local_reports.txt

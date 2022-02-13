@@ -11,10 +11,3 @@ create table env_log (
     temp_avg    decimal(5,2),
     primary key (ts_load_utc, location)
 )
-
-
-
-
-
-
-
