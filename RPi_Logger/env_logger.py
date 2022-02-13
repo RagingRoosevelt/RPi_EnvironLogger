@@ -88,7 +88,7 @@ while True:
         cur.execute(
             """
                 insert into env_log (
-                    location,ts_load,humidity,co2,
+                    location,ts_load_utc,humidity,co2,
                     temp_mcp,temp_tmp,temp_scd,temp_rtc,temp_avg
                 )
                 values
