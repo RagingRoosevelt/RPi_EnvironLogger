@@ -1,0 +1,9 @@
+psycopg2-binary
+pytz
+
+# https://learn.adafruit.com/circuitpython-on-raspberrypi-linux/installing-circuitpython-on-raspberry-pi
+Adafruit-Blinka
+adafruit_scd30
+adafruit_ds3231
+adafruit_mcp9808
+adafruit_tmp117

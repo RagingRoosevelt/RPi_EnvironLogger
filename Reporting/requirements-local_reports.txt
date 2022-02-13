@@ -1,0 +1,5 @@
+jupyterlab
+psycopg2
+pytz
+pandas
+matplotlib
