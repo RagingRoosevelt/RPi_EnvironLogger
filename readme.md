@@ -73,7 +73,7 @@ and filled out `logging_config.ini` to the pi and make sure the `.ini` and
 6. Set up the `.py` file to be run automatically when the pi launches, perhaps
 by
     * Adding a cron entry
-      1. Launch cron editor: `cron -u pi -e`
+      1. Launch cron editor: `crontab -u pi -e`
       2. Add a line like `@reboot python3 /home/pi/env_logger.py`
       3. Save and exit the editor
       4. Reboot
