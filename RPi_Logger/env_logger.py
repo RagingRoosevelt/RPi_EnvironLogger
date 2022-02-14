@@ -10,9 +10,12 @@ from datetime import datetime, timedelta
 
 from pathlib import Path
 from configparser import ConfigParser
+
+# Pull config from ini file
 conf = ConfigParser()
 conf.read(Path(__file__).parent / 'logging_config.ini')
 
+# Establish an on-going database connection
 conn = psycopg2.connect(
     host=conf['postgres'].get('hostname'),
     database=conf['postgres'].get('database'),
@@ -22,6 +25,7 @@ conn = psycopg2.connect(
 )
 cur = conn.cursor()
 
+# Connect to the I2C devices
 i2c = board.I2C()
 scd = adafruit_scd30.SCD30(i2c)
 rtc = adafruit_ds3231.DS3231(i2c)
@@ -32,10 +36,11 @@ log_freq = int(conf['logging'].get('frequency_min', 15))
 log_location = conf['logging'].get('location_name', 'unspecified location')
 local_timezone = timezone(conf['logging'].get('local_timezone', 'UTC'))
 
+# Functions to determine how long to sleep in order to hit logging frequency
 sleep_time = lambda _dt: 60*(log_freq - (dt.minute % log_freq) - 1) + (60 - dt.second)
 get_dt = lambda _rtc: datetime.fromtimestamp(time.mktime(_rtc.datetime)).replace(tzinfo=timezone('UTC'))
 
-
+# Sleep until next interval
 dt = get_dt(rtc)
 st = sleep_time(dt)
 print(
@@ -49,6 +54,7 @@ time.sleep(sleep_time(get_dt(rtc)))
 
 while True:
     try:
+        # Fetch data from the sensors
         datum = dict(
             loc=log_location,
             tsl=get_dt(rtc),
@@ -61,6 +67,7 @@ while True:
             avg=0.25*(mcp.temperature+tmp.temperature+scd.temperature+rtc.temperature)
         )
         if True:
+            # Log recording timestamp and some of the data
             dt = get_dt(rtc)
             print(
                 datum['tsl'].strftime("[%Y-%m-%d %H:%M:%S UTC]"),
@@ -85,6 +92,7 @@ while True:
                 ),
                 sep='\n'
             )
+        # Push a record to the database
         cur.execute(
             """
                 insert into env_log (
@@ -101,4 +109,5 @@ while True:
         print("===========================")
         print(ex)
 
+    # Sleep until next cycle
     time.sleep(sleep_time(get_dt(rtc)))

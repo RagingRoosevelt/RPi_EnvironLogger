@@ -51,6 +51,16 @@ Installed, it looks like this:
 3. Use the contents in the [`ddl.sql`][ddl] file to set up a table,
 modify as needed
 
+Note: I used heroku's postgres hosting. They have a free tier that supports
+10,000 rows and 20 connections.  This system only uses 1 or 2 connections
+and at 15 minute logging frequency, that's 96 records per day or around 100
+days of logging.  One caviat with using Heroku is that they ocasionally
+perform database "maintaince" that results in the hostname, database name,
+user name, and password being changed.  They email before this happens but it
+can still be a bit of a hastle.  In the future, I think I'll either install
+postgres on the Pi, or once I get my container cluster running, host a
+general-purpose postgres database there instead.
+
 [ddl]: ./ddl.sql
 
 ## Software Setup
