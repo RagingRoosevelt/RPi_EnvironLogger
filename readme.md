@@ -112,6 +112,11 @@ Outputs should look something like
 
 ![img](./Reporting/env_log_plot.png "Demo output figure from reporting notebook")
 
+Note: I suspect that the erratic data shown in this demo is due to the
+proximity of my Pi to my HVAC ducts.  I'm planning to either move the Pi
+away from the ducts or distribute the temperature sensors around the crawl
+space rather than having them all mounted together.
+
 
 [req_rept]: ./Reporting/requirements-local_reports.txt
 [plot]: ./Reporting/plot.ipynb
